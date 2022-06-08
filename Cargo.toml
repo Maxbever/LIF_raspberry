@@ -6,6 +6,6 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rustupolis_server = "0.0.4"
+rustupolis_server = "0.0.5"
 local-ip-address = "0.4.4"
 crossbeam = "0.8"

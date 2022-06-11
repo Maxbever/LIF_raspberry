@@ -65,8 +65,8 @@ fn main() {
                                     if data.rest().is_empty() {
                                         if let E::D(latitude) = tuple.first() {
                                             if let E::D(longitude) = tuple.rest().first() {
-                                                if let E::D(altitude) = tuple.rest().rest().first() {
-                                                    location = (Some(*latitude), Some(*longitude), Some(*altitude))
+                                                if let E::I(altitude) = tuple.rest().rest().first() {
+                                                    location = (Some(*latitude), Some(*longitude), Some(*altitude as f64))
                                                 }
                                             }
                                         }
@@ -78,8 +78,8 @@ fn main() {
                                 nb_tuple += 1;
                                 if let E::D(latitude) = data.first() {
                                     if let E::D(longitude) = data.rest().first() {
-                                        if let E::D(altitude) = data.rest().rest().first() {
-                                            location = (Some(*latitude), Some(*longitude), Some(*altitude))
+                                        if let E::I(altitude) = data.rest().rest().first() {
+                                            location = (Some(*latitude), Some(*longitude), Some(*altitude as f64))
                                         }
                                     }
                                 }
@@ -97,7 +97,7 @@ fn main() {
 
                             repo2.lock().unwrap().add_tuple_to_tuple_space(
                                 String::from("DATA"),
-                                tuple![E::I(id), E::D(location.0.unwrap()), E::D(location.1.unwrap()),E::D(85.6), E::D(mean)],
+                                tuple![E::I(id), E::D(location.0.unwrap()), E::D(location.1.unwrap()),E::D(85.5), E::D(mean)],
                             );
                         }
                     }

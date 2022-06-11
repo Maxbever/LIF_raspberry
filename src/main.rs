@@ -97,7 +97,7 @@ fn main() {
 
                             repo2.lock().unwrap().add_tuple_to_tuple_space(
                                 String::from("DATA"),
-                                tuple![E::I(id), E::D(location.0.unwrap()), E::D(location.1.unwrap()),E::D(location.2.unwrap()), E::D(mean)],
+                                tuple![E::I(id), E::D(location.0.unwrap()), E::D(location.1.unwrap()),E::D(85.6), E::D(mean)],
                             );
                         }
                     }

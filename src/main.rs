@@ -59,7 +59,7 @@ fn main() {
                     if !data.is_empty() {
                         while !data.is_empty() {
                             if let E::T(tuple) = data.first() {
-                                if let E::D(nbr) = tuple.rest().rest().first() {
+                                if let E::D(nbr) = tuple.rest().rest().rest().first() {
                                     sum_light += nbr;
                                     nb_tuple += 1;
                                     if data.rest().is_empty() {
@@ -73,12 +73,12 @@ fn main() {
                                     }
                                     data = data.rest();
                                 }
-                            } else if let E::D(nbr) = data.first() {
+                            } else if let E::D(nbr) = data.rest().rest().rest().first() {
                                 sum_light += nbr;
                                 nb_tuple += 1;
                                 if let E::D(latitude) = data.first() {
                                     if let E::D(longitude) = data.rest().first() {
-                                        if let E::D(altitude) = tuple.rest().rest().first() {
+                                        if let E::D(altitude) = data.rest().rest().first() {
                                             location = (Some(*latitude), Some(*longitude), Some(*altitude))
                                         }
                                     }

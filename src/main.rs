@@ -54,7 +54,7 @@ fn main() {
                     ]);
                     let mut sum_light = 0.0;
                     let mut nb_tuple = 0;
-                    let mut location: (Option<f64>, Option<f64>) = (None,None);
+                    let mut location: (Option<f64>, Option<f64>, Option<f64>) = (None,None,None);
 
                     if !data.is_empty() {
                         while !data.is_empty() {
@@ -65,7 +65,9 @@ fn main() {
                                     if data.rest().is_empty() {
                                         if let E::D(latitude) = tuple.first() {
                                             if let E::D(longitude) = tuple.rest().first() {
-                                                location = (Some(*latitude), Some(*longitude))
+                                                if let E::D(altitude) = tuple.rest().rest().first() {
+                                                    location = (Some(*latitude), Some(*longitude), Some(*altitude))
+                                                }
                                             }
                                         }
                                     }
@@ -76,7 +78,9 @@ fn main() {
                                 nb_tuple += 1;
                                 if let E::D(latitude) = data.first() {
                                     if let E::D(longitude) = data.rest().first() {
-                                        location = (Some(*latitude), Some(*longitude))
+                                        if let E::D(altitude) = tuple.rest().rest().first() {
+                                            location = (Some(*latitude), Some(*longitude), Some(*altitude))
+                                        }
                                     }
                                 }
                                 break;
@@ -88,12 +92,12 @@ fn main() {
                         if location.0.is_some() && location.1.is_some(){
                             repo2.lock().unwrap().remove_tuple_to_tuple_space(
                                 String::from("DATA"),
-                                tuple![E::I(id), E::Any, E::Any, E::Any],
+                                tuple![E::I(id), E::Any, E::Any, E::Any, E::Any],
                             );
 
                             repo2.lock().unwrap().add_tuple_to_tuple_space(
                                 String::from("DATA"),
-                                tuple![E::I(id), E::D(location.0.unwrap()), E::D(location.1.unwrap()), E::D(mean)],
+                                tuple![E::I(id), E::D(location.0.unwrap()), E::D(location.1.unwrap()),E::D(location.2.unwrap()), E::D(mean)],
                             );
                         }
                     }

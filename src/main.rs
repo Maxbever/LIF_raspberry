@@ -48,9 +48,9 @@ fn main() {
                     let mut data = client.in_instr(vec![
                         tuple![E::Any],
                         tuple![E::Any],
-                        tuple![E::Any],
-                        tuple![E::Any],
-                        tuple![E::Any],
+                        // tuple![E::Any],
+                        // tuple![E::Any],
+                        // tuple![E::Any],
                     ]);
                     let mut sum_light = 0.0;
                     let mut nb_tuple = 0;
@@ -90,18 +90,18 @@ fn main() {
                         let mean: f64 = (sum_light) as f64 / (nb_tuple) as f64;
 
                         if location.0.is_some() && location.1.is_some(){
-                            repo2.lock().unwrap().remove_tuple_to_tuple_space(
-                                String::from("DATA"),
-                                tuple![E::I(id), E::Any, E::Any, E::Any, E::Any],
-                            );
+                            // repo2.lock().unwrap().remove_tuple_to_tuple_space(
+                            //     String::from("DATA"),
+                            //     tuple![E::I(id), E::Any, E::Any, E::Any, E::Any],
+                            // );
 
                             repo2.lock().unwrap().add_tuple_to_tuple_space(
                                 String::from("DATA"),
-                                tuple![E::I(id), E::D(location.0.unwrap()), E::D(location.1.unwrap()),E::D(85.5), E::D(mean)],
+                                tuple![E::I(id), E::D(location.0.unwrap()), E::D(location.1.unwrap()),E::D(location.2.unwrap()), E::D(mean)],
                             );
                         }
                     }
-                    thread::sleep(time::Duration::from_secs(10));
+                    thread::sleep(time::Duration::from_secs(4));
                 }
             });
         }

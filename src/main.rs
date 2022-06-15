@@ -16,7 +16,9 @@ fn main() {
 
     repository.add_tuple_space(String::from("DATA"), vec![String::from("admin")]);
 
-    let server_tcp = Server::new(Protocol::TCP, &ip_address, &port_tcp, &repository);
+    let key = "secret_key_encry";
+
+    let server_tcp = Server::new(Protocol::TCP, &ip_address, &port_tcp, &repository,key);
 
     let server_launcher = ServerLauncher::new(vec![server_tcp]);
 
@@ -41,6 +43,7 @@ fn main() {
                     port.to_string(),
                     String::from("tcp"),
                     &id.to_string(),
+                    key
                 );
 
                 client.attach(&id.to_string(), vec![attribute.clone()], &tuple_space_name);

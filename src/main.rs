@@ -51,9 +51,6 @@ fn main() {
                     let mut data = client.in_instr(vec![
                         tuple![E::Any],
                         tuple![E::Any],
-                        // tuple![E::Any],
-                        // tuple![E::Any],
-                        // tuple![E::Any],
                     ]);
                     let mut sum_light = 0.0;
                     let mut nb_tuple = 0;
@@ -68,8 +65,8 @@ fn main() {
                                     if data.rest().is_empty() {
                                         if let E::D(latitude) = tuple.first() {
                                             if let E::D(longitude) = tuple.rest().first() {
-                                                if let E::I(altitude) = tuple.rest().rest().first() {
-                                                    location = (Some(*latitude), Some(*longitude), Some(*altitude as f64))
+                                                if let E::D(altitude) = tuple.rest().rest().first() {
+                                                    location = (Some(*latitude), Some(*longitude), Some(*altitude))
                                                 }
                                             }
                                         }
@@ -81,8 +78,8 @@ fn main() {
                                 nb_tuple += 1;
                                 if let E::D(latitude) = data.first() {
                                     if let E::D(longitude) = data.rest().first() {
-                                        if let E::I(altitude) = data.rest().rest().first() {
-                                            location = (Some(*latitude), Some(*longitude), Some(*altitude as f64))
+                                        if let E::D(altitude) = data.rest().rest().first() {
+                                            location = (Some(*latitude), Some(*longitude), Some(*altitude))
                                         }
                                     }
                                 }
@@ -104,7 +101,7 @@ fn main() {
                             );
                         }
                     }
-                    thread::sleep(time::Duration::from_secs(4));
+                    thread::sleep(time::Duration::from_secs(2));
                 }
             });
         }
